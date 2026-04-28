@@ -1,20 +1,9 @@
-// ... import lainnya ...
-import WalletTokens from './WalletTokens'; // Import komponen baru
+// Pastikan di App.jsx ada kedua komponen ini:
+import WalletTokens from './WalletTokens';
+import KudaBalance from './KudaBalance'; // Komponen saldo TON yang lama
 
-function App() {
-  return (
-    <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center', padding: '20px' }}>
-      {/* Header */}
-      <header>
-        <h1>DApps $KUDA</h1>
-        <TonConnectButton />
-      </header>
-
-      {/* Ganti KudaBalance dengan WalletTokens */}
-      <WalletTokens />
-      
-      {/* Swap tetap ada */}
-      <KudaSwap />
-    </div>
-  );
-}
+// ... di dalam return App:
+<>
+  <KudaBalance />  {/* Untuk melihat saldo TON */}
+  <WalletTokens /> {/* Untuk melihat saldo Jetton */}
+</>

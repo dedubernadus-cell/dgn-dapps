@@ -9,15 +9,20 @@ function WalletTokens() {
   useEffect(() => {
     if (userAddress) {
       setLoading(true);
-      // Mengambil SEMUA jetton dari dompet user
+      console.log("Mencoba mengambil data untuk alamat:", userAddress); // Sensor 1
+      
       fetch(`https://tonapi.io/v2/accounts/${userAddress}/jettons`)
-        .then((res) => res.json())
+        .then((res) => {
+          console.log("Status Response API:", res.status); // Sensor 2
+          return res.json();
+        })
         .then((data) => {
+          console.log("Data yang diterima dari API:", data); // Sensor 3
           setTokens(data.balances || []);
           setLoading(false);
         })
         .catch((err) => {
-          console.error("Gagal ambil data token:", err);
+          console.error("Error saat fetch API:", err); // Sensor 4
           setLoading(false);
         });
     }
@@ -27,25 +32,18 @@ function WalletTokens() {
 
   return (
     <div style={{ padding: '20px', background: '#f8f9fa', borderRadius: '12px', border: '1px solid #ddd', marginTop: '20px' }}>
-      <h3 style={{ marginBottom: '15px' }}>Aset Anda di Jaringan TON:</h3>
-      {loading ? <p>Memuat daftar aset...</p> : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {tokens.map((token, index) => (
-            <li key={index} style={{ marginBottom: '15px', paddingBottom: '10px', borderBottom: '1px solid #eee' }}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={token.jetton.image} alt={token.jetton.symbol} style={{ width: '30px', height: '30px', marginRight: '10px', borderRadius: '50%' }} />
-                <div>
-                  <h4 style={{ margin: 0 }}>{token.jetton.name}</h4>
-                  <p style={{ margin: 0, fontSize: '0.8em', color: '#666' }}>
-                    {(token.balance / 10**token.jetton.decimals).toLocaleString()} {token.jetton.symbol}
-                  </p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <h3>Aset Anda:</h3>
+      {loading ? <p>Memuat data...</p> : (
+        tokens.length > 0 ? (
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {tokens.map((token, index) => (
+              <li key={index}>
+                {token.jetton.name}: {(token.balance / 10**token.jetton.decimals).toFixed(2)} {token.jetton.symbol}
+              </li>
+            ))}
+          </ul>
+        ) : <p>Tidak ada token jetton ditemukan di dompet ini.</p>
       )}
-      {tokens.length === 0 && !loading && <p>Tidak ada token lain ditemukan.</p>}
     </div>
   );
 }
