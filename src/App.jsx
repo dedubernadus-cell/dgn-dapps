@@ -1,9 +1,26 @@
-// Pastikan di App.jsx ada kedua komponen ini:
+import React from 'react';
+import { TonConnectButton } from '@tonconnect/ui-react';
+import KudaBalance from './KudaBalance';
 import WalletTokens from './WalletTokens';
-import KudaBalance from './KudaBalance'; // Komponen saldo TON yang lama
+import KudaSwap from './KudaSwap';
 
-// ... di dalam return App:
-<>
-  <KudaBalance />  {/* Untuk melihat saldo TON */}
-  <WalletTokens /> {/* Untuk melihat saldo Jetton */}
-</>
+function App() {
+  return (
+    <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center', padding: '20px' }}>
+      <header style={{ marginBottom: '20px' }}>
+        <h1>DApps $KUDA</h1>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <TonConnectButton />
+        </div>
+      </header>
+      
+      <main>
+        <KudaBalance />
+        <WalletTokens />
+        <KudaSwap />
+      </main>
+    </div>
+  );
+}
+
+export default App;
