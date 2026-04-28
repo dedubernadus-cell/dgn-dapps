@@ -1,6 +1,6 @@
 import React from 'react';
 import { TonConnectButton } from '@tonconnect/ui-react';
-import WalletAssets from './components/WalletAssets'; // Import yang baru
+import WalletAssets from './components/WalletAssets';
 import KudaSwap from './components/KudaSwap';
 
 function App() {
@@ -8,7 +8,6 @@ function App() {
     <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center', padding: '20px' }}>
       <h1>DApps $KUDA</h1>
       <TonConnectButton />
-      
       <WalletAssets />
       <KudaSwap />
     </div>
