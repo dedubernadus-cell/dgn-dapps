@@ -5,21 +5,25 @@ import KudaSwap from './KudaSwap';
 
 function App() {
   return (
-    <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center', padding: '20px' }}>
+    <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center', padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       
-      {/* Header dengan Tombol Connect Wallet */}
-      <header style={{ marginBottom: '30px' }}>
+      {/* 1. Bagian Header (Connect Wallet) */}
+      <header style={{ marginBottom: '30px', borderBottom: '1px solid #ccc', paddingBottom: '20px' }}>
         <h1>DApps $KUDA</h1>
-        <p>Proyek resmi komunitas kita</p>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
            <TonConnectButton />
         </div>
       </header>
 
-      {/* Konten Dashboard */}
+      {/* 2. Bagian Utama (Dashboard) */}
       <main>
+        {/* Saldo akan muncul di sini jika dompet terhubung */}
         <KudaBalance />
-        <hr style={{ margin: '30px 0', borderColor: '#eee' }} />
+        
+        {/* Pemisah */}
+        <div style={{ margin: '30px 0' }}></div>
+        
+        {/* Tombol Swap */}
         <KudaSwap />
       </main>
 
